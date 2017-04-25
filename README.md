@@ -1,10 +1,11 @@
 # Yes, we can scan IEs!
 
-IEEE 802.11 (WLAN) devices send broadcast control packets called beacons at regular intervals.
-The beacons contain information such as the name of the network (SSID), the channel/frequency 
+IEEE 802.11 (WLAN) devices send broadcast control packets called *beacons* at regular intervals.
+Beacons contain information such as the name of the network (SSID), the channel/frequency 
 used by the device, etc.
+
 In addition to this information, some IEEE 802.11 (outdoor device) vendors use proprietary 
-Information Elements (IEs) in the beacons of their devices.
+Information Elements (**IEs**) in the beacons of their devices.
 These IEs usually contain the name of the device to help in the scanning process: 
 when users perform "site surveys" from the web interface of their devices, they will find, 
 next to the SSID, channel, and other information, the device name of the device generating
@@ -13,7 +14,7 @@ the beacons.
 In Linux based OSes (including OpenWRT/LEDE) this feature is not ready out of the box,
 but the scripts here included can help to scan, decode and generate these proprietary IEs.
 
-The scripts are designed to work with busybox/OpenWRT/LEDE.
+The scripts here included are designed to work also with busybox/OpenWRT/LEDE.
 
 ## sitesurvey
 
