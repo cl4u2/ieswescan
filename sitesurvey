@@ -1,0 +1,81 @@
+#!/bin/sh
+
+# Copyright (c) Claudio Pisa <clauz@ninux.org>
+# Released under the GNU General Public License v3
+
+# This script outputs a wireless scan survey including the hostnames which are broadcast
+# in ubiquiti (and other vendors') beacons (OUI 00:0c:42).
+
+DEV="$1"
+
+if [ -z "$DEV" ]; then
+    echo -e "\t\tUsage: $0 <wlan device>"
+    echo -e "\t\te.g.   $0 wlan0"
+    exit 1
+fi
+
+SCAN="$(iw dev $DEV scan -u)"
+
+# optimization
+SCAN="$(echo "$SCAN" | grep 'BSS\|signal:\|SSID:\|freq:\|OUI 00:0c:42')"
+
+# offset for the hostname in the 802.11 beacon IE
+OFFSET=15
+
+BSS=""
+SSID=""
+CHANNEL=""
+HNAME=""
+SIGNAL=""
+
+# we want a list of SSID, CHANNEL, HOSTNAME
+printf "%20s%30s%14s%8s%20s\n" "BSS" "SSID" "SIGNAL" "FREQ" "HOSTNAME"
+echo "$SCAN" | while read line; do
+    B="$(echo "$line" | egrep "^BSS" | grep -v 'Load' | awk '{print $2}' | sed 's/(.*$//')"
+    if [ -n "$B" ]; then
+        if [ -n "$BSS" ]; then
+            printf "%20s%30s%14s%8s%20s\n" "$BSS" "$SSID" "$SIGNAL" "$CHANNEL" "$HNAME"
+            BSS=""
+            SSID=""
+            CHANNEL=""
+            HNAME=""
+            SIGNAL=""
+        fi
+        BSS="$B"
+    fi
+
+    S="$(echo "$line" | grep "SSID:" | awk -F":" '{print $2}')"
+    if [ -n "$S" ]; then
+        SSID="$S"
+    fi
+
+    C="$(echo "$line" | grep "freq:" | awk -F":" '{print $2}')"
+    if [ -n "$C" ]; then
+        CHANNEL="$C"
+    fi
+    
+    G="$(echo "$line" | grep "signal:" | awk -F":" '{print $2}')"
+    if [ -n "$G" ]; then
+        SIGNAL="$G"
+    fi
+
+    # OUI 00:0c:42 contains the information element
+    T="$(echo "$line" | grep "OUI 00:0c:42" | sed 's/.*data: \(.*\)/\1/g' )"
+    if [ -n "$T" ]; then
+        H=""
+        cur=0
+        for t in $T; do
+            cur=$((cur+1))
+            if [ $cur -gt $OFFSET ]; then
+                if [ -n "$t" ] && [ "$t" != "00" ]; then
+                    H0=$(printf "\x$t")
+                    H="${H}${H0}"
+                fi
+            fi
+        done
+        HNAME="$H"
+    fi
+done
+
+
+
