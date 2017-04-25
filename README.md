@@ -20,7 +20,7 @@ The scripts here included are designed to work also with busybox/OpenWRT/LEDE.
 
 This script outputs a table like the one below:
 
-                 BSS                          SSID        SIGNAL    FREQ            HOSTNAME
+                  BSS                          SSID        SIGNAL    FREQ            HOSTNAME
     a2:63:91:aa:aa:aa                        D-Link    -82.00 dBm    2412                    
     c0:4a:00:bb:bb:bb            NetUndereXperiment    -79.00 dBm    2437          experiment
     44:d9:e7:cc:cc:cc                          ubnt    -51.00 dBm    5220                 fox
