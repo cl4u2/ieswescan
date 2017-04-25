@@ -35,18 +35,18 @@ To use it try:
     ./sitesurvey wlan0
 
 
-## generatevendorelement.sh
+## generatevendorelement
 
 Hostapd already includes a configuration parameter called `vendor_elements` which can be configured to send custom IEs.
 This script takes as input a name (e.g. the hostname) and generates a corresponding `vendor_elements` configuration value for `hostapd.conf`.
 
 Example:
 
-    wget --no-check-certificate https://raw.githubusercontent.com/cl4u2/ieswescan/master/generatevendorelement.sh
-    chmod +x generatevendorelement.sh
-    ./generatevendorelement.sh "$(uci get system.@system[0].hostname)"
+    wget --no-check-certificate https://raw.githubusercontent.com/cl4u2/ieswescan/master/generatevendorelement
+    chmod +x generatevendorelement
+    ./generatevendorelement "$(uci get system.@system[0].hostname)"
     ...
-    ./generatevendorelement.sh "experiment"
+    ./generatevendorelement "experiment"
     dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
 
 We can then take the output of this script and add it to our `hostapd.conf`. For example:
