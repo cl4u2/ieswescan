@@ -5,9 +5,9 @@ Beacons contain information such as the name of the network (SSID), the channel/
 used by the device, etc.
 
 In addition to this information, some IEEE 802.11 (outdoor device) vendors use proprietary 
-Information Elements (**IEs**) in the beacons of their devices.
+extensions, in the form of IEEE 802.11 Information Elements (**IEs**) in the beacons of their devices.
 These IEs usually contain the name of the device to help in the scanning process: 
-when users perform "site surveys" from the web interface of their devices, they will find, 
+when users perform "site surveys" from the web interface of their devices, they find, 
 next to the SSID, channel, and other information, the device name of the device generating
 the beacons.
 
@@ -37,7 +37,7 @@ To use it try:
 
 ## generatevendorelement
 
-Hostapd already includes a configuration parameter called `vendor_elements` which can be configured to send custom IEs.
+hostapd already includes a configuration parameter called `vendor_elements` which can be configured to send custom IEs.
 This script takes as input a name (e.g. the hostname) and generates a corresponding `vendor_elements` configuration value for `hostapd.conf`.
 
 Example:
