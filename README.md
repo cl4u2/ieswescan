@@ -5,16 +5,17 @@ Beacons contain information such as the name of the network (SSID), the channel/
 used by the device, etc.
 
 In addition to this information, some IEEE 802.11 (outdoor device) vendors use proprietary 
-extensions, in the form of IEEE 802.11 Information Elements (**IEs**) in the beacons of their devices.
+extensions, in the form of IEEE 802.11 Information Elements (**IEs**),
+in the beacons of their devices.
 These IEs usually contain the name of the device to help in the scanning process: 
-when users perform "site surveys" from the web interface of their devices, they find, 
+when users perform "site surveys" from the web interface of their devices, they will find, 
 next to the SSID, channel, and other information, the device name of the device generating
 the beacons.
 
 In Linux based OSes (including OpenWRT/LEDE) this feature is not ready out of the box,
 but the scripts here included can help to scan, decode and generate these proprietary IEs.
 
-The scripts here included are designed to work also with busybox/OpenWRT/LEDE.
+These scripts are designed to work also with busybox/OpenWRT/LEDE.
 
 ## sitesurvey
 
@@ -56,6 +57,6 @@ We can then take the output of this script and add it to our `hostapd.conf`. For
     # the end of the Beacon and Probe Response frames. The format for these
     # element(s) is a hexdump of the raw information elements (id+len+payload for
     # one or more elements)
-    vendor_elements=d22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
+    vendor_elements=dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
     
  
