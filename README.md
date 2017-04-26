@@ -8,14 +8,14 @@ In addition to this information, some IEEE 802.11 (outdoor device) vendors use p
 extensions, in the form of IEEE 802.11 Information Elements (**IEs**),
 in the beacons of their devices.
 These IEs usually contain the name of the device to help in the scanning process: 
-when users perform "site surveys" from the web interface of their devices, they will find, 
-next to the SSID, channel, and other information, the device name of the device generating
+when users perform "site surveys" from the web interface of their devices (with original firmwares),
+they will find, next to the SSID, channel, and other information, the device name of the device generating
 the beacons.
 
 In Linux based OSes (including OpenWRT/LEDE) this feature is not ready out of the box,
 but the scripts here included can help to scan, decode and generate these proprietary IEs.
 
-These scripts are designed to work also with busybox/OpenWRT/LEDE.
+These scripts are designed to work also with the busybox shell on OpenWRT/LEDE.
 
 ## sitesurvey
 
