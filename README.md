@@ -59,4 +59,8 @@ We can then take the output of this script and add it to our `hostapd.conf`. For
     # one or more elements)
     vendor_elements=dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
     
+Or try something like:
+
+    echo vendor_elements=$(./generatevendorelement "$(uci get system.@system[0].hostname)") >> /var/run/hostapd-phy0.conf
+    kill -HUP $(cat /var/run/wifi-phy0.pid)
  
