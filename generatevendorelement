@@ -20,11 +20,9 @@ fi
 
 hexhname="$(echo -n "$HNAME" | sed 's/\(.\)/\1\n/g' | while read c; do printf '%02x' "'$c "; done)"
 
-len=$((len+24))
-
-
-hexlen=$(printf '%02x' $len)
-
-vendor_elements="dd${hexlen}000c42000000011e000000001f660902ff0f${hexhname}000000000000"
+vendor_elements="dd26000c42000000011e000000001f660902ff0f${hexhname}"
+while [ $(echo -n "$vendor_elements" | wc -c) -lt 80 ]; do
+    vendor_elements="${vendor_elements}00"
+done
 echo $vendor_elements
 
