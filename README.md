@@ -13,7 +13,7 @@ they will find, next to the SSID, channel, and other information, the device nam
 the beacons.
 
 In Linux based OSes (including OpenWRT/LEDE) this feature is not ready out of the box,
-but the scripts here included can help to scan, decode and generate these proprietary IEs.
+but the scripts here included can help to scan, decode and generate these proprietary (OUI 00:0c:42) IEs.
 
 These scripts are designed to work also with the busybox shell on OpenWRT/LEDE.
 
@@ -45,8 +45,6 @@ Example:
 
     wget --no-check-certificate https://raw.githubusercontent.com/cl4u2/ieswescan/master/generatevendorelement
     chmod +x generatevendorelement
-    ./generatevendorelement "$(uci get system.@system[0].hostname)"
-    ...
     ./generatevendorelement "experiment"
     dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
 
@@ -59,8 +57,11 @@ We can then take the output of this script and add it to our `hostapd.conf`. For
     # one or more elements)
     vendor_elements=dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
     
-Or try something like:
+OpenWrt and LEDE provide ubus support:
 
-    echo vendor_elements=$(./generatevendorelement "$(uci get system.@system[0].hostname)") >> /var/run/hostapd-phy0.conf
-    kill -HUP $(cat /var/run/wifi-phy0.pid)
+    VEL=$(./generatevendorelement $(uci get system.@system[0].hostname))
+    ubus call hostapd.wlan0 set_vendor_elements '{"vendor_elements": "'$VEL'"}'
+    ubus call hostapd.wlan0 update_beacon
+
+
  
