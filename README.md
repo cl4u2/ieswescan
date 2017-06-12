@@ -38,8 +38,8 @@ To use it try:
 
 ## generatevendorelement
 
-hostapd already includes a configuration parameter called `vendor_elements` which can be configured to send custom IEs.
-This script takes as input a name (e.g. the hostname) and generates a corresponding `vendor_elements` configuration value for `hostapd.conf`.
+hostapd includes a configuration parameter called `vendor_elements` which can be configured to send custom IEs.
+The generatevendorelement script takes as input a name (e.g. the hostname) and generates a corresponding `vendor_elements` configuration value for `hostapd.conf`.
 
 Example:
 
@@ -57,7 +57,7 @@ We can then take the output of this script and add it to our `hostapd.conf`. For
     # one or more elements)
     vendor_elements=dd26000c42000000011e000000001f660902ff0f6578706572696d656e7400000000000000000000
     
-OpenWrt and LEDE provide ubus support:
+OpenWrt and LEDE provide ubus support for this:
 
     VEL=$(./generatevendorelement $(uci get system.@system[0].hostname))
     ubus call hostapd.wlan0 set_vendor_elements '{"vendor_elements": "'$VEL'"}'
