@@ -46,7 +46,7 @@ Example:
     wget --no-check-certificate https://raw.githubusercontent.com/cl4u2/ieswescan/master/generatevendorelement
     chmod +x generatevendorelement
     ./generatevendorelement "experiment"
-    dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
+    dd26000c42000000011e000000001f660902ff0f6578706572696d656e7400000000000000000000
 
 We can then take the output of this script and add it to our `hostapd.conf`. For example:
 
@@ -55,7 +55,7 @@ We can then take the output of this script and add it to our `hostapd.conf`. For
     # the end of the Beacon and Probe Response frames. The format for these
     # element(s) is a hexdump of the raw information elements (id+len+payload for
     # one or more elements)
-    vendor_elements=dd22000c42000000011e000000001f660902ff0f6578706572696d656e74000000000000
+    vendor_elements=dd26000c42000000011e000000001f660902ff0f6578706572696d656e7400000000000000000000
     
 OpenWrt and LEDE provide ubus support:
 
