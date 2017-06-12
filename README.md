@@ -64,4 +64,10 @@ OpenWrt and LEDE provide ubus support for this:
     ubus call hostapd.wlan0 update_beacon
 
 
- 
+## more information
+
+Please refer to this presentation:
+ * [IEs, we Scan! - slides](http://www.battlemesh.org/BattleMeshV10?action=AttachFile&do=get&target=ieswescanWBM10.pdf)
+ * [IEs, we Scan! - video](https://www.youtube.com/watch?v=S3rj_gDP1eQ)
+
+
